@@ -3,4 +3,3 @@ uvicorn
 httpx
 pydantic
 pydantic-settings
-sqlalchemy
