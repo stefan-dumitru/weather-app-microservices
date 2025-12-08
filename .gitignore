@@ -1,0 +1,53 @@
+# Node / Frontend Stuff
+
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# virtual environments
+venv/
+*/venv/
+**/venv/
+
+# Python cache
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment variables (ALL services)
+*.env
+.env
+**/.env
+
+# macOS
+.DS_Store
+
+# JetBrains
+.idea/
+
+# VS Code (allow only extensions.json)
+.vscode/*
+!.vscode/extensions.json
+
+# Windows
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Web push keys (if generated locally)
+*.pem
+*.key
