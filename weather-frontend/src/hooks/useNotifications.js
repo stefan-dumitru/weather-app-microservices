@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 
 export default function useNotifications(token, onAlert) {
+  const API_GATEWAY_URL = import.meta.env.VITE_API_GATEWAY_URL;
+  
   useEffect(() => {
     if (!token) return;
-
-    const API_GATEWAY_URL = import.meta.env.VITE_API_GATEWAY_URL;
 
     const evtSource = new EventSource(
       `${API_GATEWAY_URL}/alerts/stream?token=${token}`
