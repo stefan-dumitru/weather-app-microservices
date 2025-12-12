@@ -27,6 +27,8 @@ export default function useNotifications(token, onAlert) {
 }
 
 async function registerPush(token) {
+  const API_GATEWAY_URL = import.meta.env.VITE_API_GATEWAY_URL;
+
   if (!("serviceWorker" in navigator)) {
     console.warn("❌ Service workers not supported");
     return;

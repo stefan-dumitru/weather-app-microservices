@@ -9,6 +9,7 @@ export default function Dashboard() {
   const [weather, setWeather] = useState({});
   const [city, setCity] = useState("");
   const [notifications, setNotifications] = useState([]);
+  const [forecast, setForecast] = useState({});
 
   const token = localStorage.getItem("access_token");
 
@@ -21,11 +22,18 @@ export default function Dashboard() {
     setLocations(locRes.data);
 
     const w = {};
+    const forecasts = {};
+
     for (const loc of locRes.data) {
       const res = await weatherApi.getCurrent(loc.latitude, loc.longitude);
+      const fRes = await weatherApi.getForecast(loc.latitude, loc.longitude);
+
       w[loc.id] = res.data;
+      forecasts[loc.id] = fRes.data;
     }
+
     setWeather(w);
+    setForecast(forecasts)
   }
 
   useEffect(() => {
@@ -91,6 +99,16 @@ export default function Dashboard() {
           <h3>{loc.name}</h3>
           <p>Temperature: {weather[loc.id]?.temperature}°C</p>
           <p>Condition: {weather[loc.id]?.description}</p>
+
+          <h4>7-Day Forecast</h4>
+          <ul>
+            {forecast[loc.id]?.days?.map((day, i) => (
+              <li key={i}>
+                <strong>{new Date(day.date).toLocaleDateString()}</strong>: 
+                {day.temperature_min}°C / {day.temperature_max}°C — {day.description}
+              </li>
+            ))}
+          </ul>
         </div>
       ))}
     </div>

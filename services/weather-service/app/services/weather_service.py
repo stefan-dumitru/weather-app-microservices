@@ -51,22 +51,21 @@ async def fetch_week_forecast(lat: float, lon: float):
 
     data = r.json()
 
-    days = []
-    used_dates = set()
-
+    grouped = {}
     for entry in data["list"]:
         date = entry["dt_txt"].split(" ")[0]
+        grouped.setdefault(date, []).append(entry)
 
-        if date in used_dates:
-            continue
-        
-        used_dates.add(date)
+    days = []
+
+    for date, entries in grouped.items():
+        best = min(entries, key=lambda e: abs(int(e["dt_txt"][11:13]) - 12))
 
         days.append({
             "date": date,
-            "temperature_min": entry["main"]["temp_min"],
-            "temperature_max": entry["main"]["temp_max"],
-            "description": entry["weather"][0]["description"],
+            "temperature_min": best["main"]["temp_min"],
+            "temperature_max": best["main"]["temp_max"],
+            "description": best["weather"][0]["description"],
         })
 
         if len(days) == 7:
