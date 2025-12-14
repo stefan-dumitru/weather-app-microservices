@@ -1,15 +1,8 @@
 import axios from "axios";
 
-const baseURL = import.meta.env.VITE_API_BASE_URL;
-
-console.log("API Base URL:", import.meta.env.VITE_API_BASE_URL);
-console.log("API Base URL:", baseURL);
-
-if (baseURL?.startsWith("http://") && import.meta.env.PROD) {
-  throw new Error("🚨 Insecure API base URL in production");
-}
-
-const axiosClient = axios.create({ baseURL });
+const axiosClient = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL,
+});
 
 // Interceptor for JWT
 axiosClient.interceptors.request.use((config) => {
