@@ -1,3 +1,5 @@
+// Weather App Service Worker v2 – HTTPS safe
+
 self.addEventListener("push", (event) => {
   const message = event.data.text();
 
