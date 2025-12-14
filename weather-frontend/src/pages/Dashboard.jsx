@@ -3,6 +3,7 @@ import locationApi from "../api/locationApi";
 import weatherApi from "../api/weatherApi";
 import useNotifications from "../hooks/useNotifications";
 import NotificationToast from "../components/NotificationToast";
+import AddAlert from "./AddAlert";
 
 export default function Dashboard() {
   const [locations, setLocations] = useState([]);
@@ -70,6 +71,8 @@ export default function Dashboard() {
   return (
     <div style={{ padding: 20 }}>
       <h2>Your Weather Dashboard</h2>
+
+      <AddAlert locations={locations} />
 
       {/* FORM Add Location */}
       <form onSubmit={handleAddLocation} style={{ marginBottom: 20 }}>
