@@ -99,11 +99,13 @@ async def alert_monitor():
                         )
                     except Exception as e:
                         print("❌ Failed to notify gateway:", e)
+                
+                db.commit()
+                await asyncio.sleep(10)  # brief pause to avoid overwhelming the gateway
 
                 # Disable alert
                 # alert.active = False
-                db.commit()
 
         db.close()
 
-        await asyncio.sleep(10)
+        await asyncio.sleep(60)
