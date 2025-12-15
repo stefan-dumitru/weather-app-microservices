@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, Request, HTTPException
 from fastapi.responses import StreamingResponse
 from app.core.security import validate_token
-from app.services.alert_client import create_alert, get_alerts
+from app.services.alert_client import create_alert, get_alerts, toggle_alert, delete_alert
 import asyncio
 
 from pywebpush import webpush, WebPushException
@@ -94,3 +94,15 @@ async def subscribe_push(subscription: dict):
         push_subscriptions.append(subscription)
 
     return {"status": "subscribed"}
+
+
+@router.patch("/{alert_id}/toggle")
+async def gateway_toggle_alert(alert_id: int, payload=Depends(validate_token)):
+    result, status = await toggle_alert(alert_id)
+    return result
+
+
+@router.delete("/{alert_id}")
+async def gateway_delete_alert(alert_id: int, payload=Depends(validate_token)):
+    result, status = await delete_alert(alert_id)
+    return result

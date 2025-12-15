@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import locationApi from "../api/locationApi";
 import weatherApi from "../api/weatherApi";
 import useNotifications from "../hooks/useNotifications";
@@ -73,6 +74,12 @@ export default function Dashboard() {
       <h2>Your Weather Dashboard</h2>
 
       <AddAlert locations={locations} />
+
+      <div style={{ marginBottom: 20 }}>
+        <Link to="/alerts">
+          <button>View & Manage Alerts</button>
+        </Link>
+      </div>
 
       {/* FORM Add Location */}
       <form onSubmit={handleAddLocation} style={{ marginBottom: 20 }}>
