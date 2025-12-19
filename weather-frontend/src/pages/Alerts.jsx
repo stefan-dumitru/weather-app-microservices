@@ -37,7 +37,7 @@ export default function Alerts() {
         <ul>
           {alerts.map((a) => (
             <li key={a.id} style={{ marginBottom: 10 }}>
-              <strong>{a.city_name}</strong> — {a.condition} {a.threshold}
+              <strong>{a.city_name}</strong> — {a.condition} {a.threshold} — Range: {a.day_range === 0 ? "Today" : `Next ${a.day_range} days`}
 
               <button
                 onClick={async () => {

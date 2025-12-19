@@ -6,6 +6,7 @@ class AlertBase(BaseModel):
     longitude: float
     condition: str
     threshold: float
+    day_range: int = 0
 
 class AlertCreate(AlertBase):
     active: bool = True

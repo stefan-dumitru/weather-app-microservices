@@ -5,6 +5,7 @@ export default function AddAlert({ locations }) {
   const [locationId, setLocationId] = useState("");
   const [condition, setCondition] = useState("temp_above");
   const [threshold, setThreshold] = useState("");
+  const [dayRange, setDayRange] = useState(0);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -19,10 +20,12 @@ export default function AddAlert({ locations }) {
         longitude: loc.longitude,
         condition,
         threshold: threshold ? Number(threshold) : 0,
+        day_range: Number(dayRange),
       });
 
       alert("✅ Alert created!");
       setThreshold("");
+      setDayRange(0);
     } catch (err) {
       console.error(err);
       alert("❌ Failed to create alert");
@@ -71,6 +74,22 @@ export default function AddAlert({ locations }) {
             required
           />
         ) : null}
+
+        {/* DAY RANGE */}
+        <label style={{ display: "block", marginTop: 10 }}>
+          Alert range (days):
+        </label>
+
+        <select
+          value={dayRange}
+          onChange={e => setDayRange(e.target.value)}
+        >
+          {[0,1,2,3,4,5,6,7].map(d => (
+            <option key={d} value={d}>
+              {d === 0 ? "Today only" : `Next ${d} day${d > 1 ? "s" : ""}`}
+            </option>
+          ))}
+        </select>
 
         <button type="submit">Create Alert</button>
       </form>
