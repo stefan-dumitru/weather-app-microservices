@@ -160,4 +160,4 @@ async def alert_monitor():
                     await asyncio.sleep(10)
 
         db.close()
-        await asyncio.sleep(60)
+        await asyncio.sleep(1800)  # Wait 30 minutes before next check
