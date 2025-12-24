@@ -5,7 +5,7 @@ from app.models.alert import Alert
 from app.schemas.alert import AlertCreate
 from app.core.config import settings
 from app.db.session import SessionLocal
-from datetime import datetime, date
+from datetime import datetime, date, timezone, timedelta
 
 # CREATE ALERT
 
@@ -153,7 +153,7 @@ async def alert_monitor():
                             print("❌ Failed to notify gateway:", e)
 
                     # Mark alert as triggered for this day
-                    alert.last_triggered_at = datetime.utcnow()
+                    alert.last_triggered_at = datetime.now(timezone.utc) + timedelta(hours=2)
                     db.commit()
 
                     # Small pause to avoid burst notifications
